@@ -6,6 +6,8 @@
 
 ---
 
+## 移除 Aurora 主题
+
 ## immortalwrt 源码
 
 编译自 https://github.com/padavanonly/immortalwrt-mt798x-6.6 ，兼容 Cudy Tr3000 128M 新 flash
@@ -53,8 +55,6 @@ echo 1 > /sys/class/gpio/modem_power/value
 
 - [OpenClash](https://github.com/vernesong/OpenClash)
 - [Bandix](https://github.com/timsaya/luci-app-bandix)
-- [luci-theme-aurora](https://github.com/eamonxg/luci-theme-aurora)
-- [luci-app-aurora-config](https://github.com/eamonxg/luci-app-aurora-config)
 - luci-app-ttyd
 - luci-app-upnp
 - kmod-usb-net-cdc-ether
