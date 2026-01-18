@@ -42,35 +42,17 @@ sed -i -e '/^IMG_PREFIX:=/i BUILD_DATE := $(shell date +%Y%m%d)' \
 # Add OpenClash Meta (mihomo) - Latest Stable ARM64
 # -------------------------------------------------------
 
-set -e
+# 创建 OpenClash core 目录
+mkdir -p files/etc/openclash/core
 
-CORE_DIR="files/etc/openclash/core"
-TMP_FILE="/tmp/mihomo_latest.gz"
+# 获取 mihomo 最新稳定版下载地址（ARM64）
+MIHOMO_URL=$(wget -qO- https://api.github.com/repos/MetaCubeX/mihomo/releases/latest \
+  | grep browser_download_url \
+  | grep linux-arm64 \
+  | cut -d '"' -f 4)
 
-mkdir -p ${CORE_DIR}
+# 下载 mihomo
+wget -qO files/etc/openclash/core/clash_meta "$MIHOMO_URL"
 
-echo "Fetching latest mihomo stable release tag..."
-
-LATEST_TAG=$(wget -qO- https://api.github.com/repos/MetaCubeX/mihomo/releases/latest | \
-             grep '"tag_name"' | head -n 1 | sed -E 's/.*"([^"]+)".*/\1/')
-
-echo "Latest mihomo version: ${LATEST_TAG}"
-
-DOWNLOAD_URL="https://github.com/MetaCubeX/mihomo/releases/download/${LATEST_TAG}/mihomo-linux-arm64-${LATEST_TAG}.gz"
-
-echo "Downloading: ${DOWNLOAD_URL}"
-
-wget -qO "${TMP_FILE}" "${DOWNLOAD_URL}"
-
-gzip -d "${TMP_FILE}"
-mv "mihomo" "${CORE_DIR}/mihomo"
-
-# 统一 OpenClash 识别的内核名称
-if [ -f "${CORE_DIR}/mihomo" ]; then
-    mv "${CORE_DIR}/mihomo" "${CORE_DIR}/clash_meta"
-fi
-
-chmod +x "${CORE_DIR}/clash_meta"
-rm -f "${TMP_FILE}"
-
-echo "mihomo stable core installed successfully."
+# 赋予执行权限
+chmod +x files/etc/openclash/core/clash_meta
