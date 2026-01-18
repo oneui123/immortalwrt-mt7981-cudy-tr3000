@@ -19,3 +19,7 @@
 
 git clone https://github.com/timsaya/luci-app-bandix package/luci-app-bandix
 git clone https://github.com/timsaya/openwrt-bandix package/openwrt-bandix
+
+# OpenClash（使用官方最新版本）
+rm -rf package/luci-app-openclash
+git clone --depth=1 https://github.com/vernesong/OpenClash.git package/luci-app-openclash
