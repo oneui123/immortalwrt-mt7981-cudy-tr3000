@@ -45,7 +45,7 @@ sed -i -e '/^IMG_PREFIX:=/i BUILD_DATE := $(shell date +%Y%m%d)' \
 set -e
 
 CORE_DIR="files/etc/openclash/core"
-TMP_FILE="/tmp/mihomo_latest.tar.gz"
+TMP_FILE="/tmp/mihomo_latest.gz"
 
 mkdir -p ${CORE_DIR}
 
@@ -56,13 +56,14 @@ LATEST_TAG=$(wget -qO- https://api.github.com/repos/MetaCubeX/mihomo/releases/la
 
 echo "Latest mihomo version: ${LATEST_TAG}"
 
-DOWNLOAD_URL="https://github.com/MetaCubeX/mihomo/releases/download/${LATEST_TAG}/mihomo-linux-arm64-${LATEST_TAG}.tar.gz"
+DOWNLOAD_URL="https://github.com/MetaCubeX/mihomo/releases/download/${LATEST_TAG}/mihomo-linux-arm64-${LATEST_TAG}.gz"
 
 echo "Downloading: ${DOWNLOAD_URL}"
 
 wget -qO "${TMP_FILE}" "${DOWNLOAD_URL}"
 
-tar -zxvf "${TMP_FILE}" -C "${CORE_DIR}"
+gzip -d "${TMP_FILE}"
+mv "mihomo" "${CORE_DIR}/mihomo"
 
 # 统一 OpenClash 识别的内核名称
 if [ -f "${CORE_DIR}/mihomo" ]; then
