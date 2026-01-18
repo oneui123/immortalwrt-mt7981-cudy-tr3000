@@ -6,7 +6,9 @@
 
 ---
 
-## 移除 Aurora 主题
+## 移除 Aurora 主题和UPNP
+
+## 编译时默认使用最新版本 OpenClash
 
 ## immortalwrt 源码
 
