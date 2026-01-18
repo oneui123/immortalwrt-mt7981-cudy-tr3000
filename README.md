@@ -58,7 +58,6 @@ echo 1 > /sys/class/gpio/modem_power/value
 - [OpenClash](https://github.com/vernesong/OpenClash)
 - [Bandix](https://github.com/timsaya/luci-app-bandix)
 - luci-app-ttyd
-- luci-app-upnp
 - kmod-usb-net-cdc-ether
 - kmod-usb-net-rndis
 - kmod-mtd-rw
