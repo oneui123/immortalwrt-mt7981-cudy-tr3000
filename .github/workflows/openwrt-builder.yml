@@ -12,7 +12,7 @@ on:
         description: '编译设备型号'
         required: true
         type: choice
-        default: '256M'
+        default: '128M-Ubootmod'
         options:
           - '256M'
           - '128M'
@@ -100,8 +100,11 @@ jobs:
       - name: 🧬 Update feeds
         run: cd openwrt && ./scripts/feeds update -a
 
-      - name: 🪛 Install feeds
-        run: cd openwrt && ./scripts/feeds install -a
+      - name: 🪛 Install feeds (exclude rust)
+        run: |
+          cd openwrt
+          ./scripts/feeds install -a
+          ./scripts/feeds uninstall rust
 
       - name: 🧩 Load custom configuration
         run: |
@@ -252,8 +255,11 @@ jobs:
       - name: 🧬 Update feeds
         run: cd openwrt && ./scripts/feeds update -a
 
-      - name: 🪛 Install feeds
-        run: cd openwrt && ./scripts/feeds install -a
+      - name: 🪛 Install feeds (exclude rust)
+        run: |
+          cd openwrt
+          ./scripts/feeds install -a
+          ./scripts/feeds uninstall rust
 
       - name: 🧩 Load custom configuration
         run: |
